@@ -1,0 +1,46 @@
+Condition: The access times should be sorted and there should be three or more than three access times in list. 
+For the sorted access times find the difference between them  and add 99. If the difference between the two access times >60 minutes 
+then it is false.
+
+Code:
+class Solution {
+    private boolean isHighAcess(List<Integer> time){
+        int n = time.size();
+
+        for(int i=2; i<n; i++){
+            int current_time = time.get(i);
+            int prev_prev_time = time.get(i-2);
+            if(prev_prev_time + 99 >= current_time){
+                return true;
+            }
+        }
+        return false;
+
+    }
+    public List<String> findHighAccessEmployees(List<List<String>> access_times) {
+        List<String> high_at_employees = new ArrayList<>();
+        Map<String, List<Integer>> map = new HashMap<>();
+        for(List<String> current : access_times){
+            String emp = current.get(0);
+            String time = current.get(1);
+
+            if(!map.containsKey(emp)){
+                map.put(emp, new ArrayList<>());
+            }
+            int t = Integer.parseInt(time);
+            map.get(emp).add(t);
+        }
+        for(String emp : map.keySet()){
+            List<Integer> at = map.get(emp);
+            Collections.sort(at);
+            if(isHighAcess(at)){
+                high_at_employees.add(emp);
+            }
+        }
+        return high_at_employees;
+    }
+
+}
+
+Time Complexity: O(n*m log m)
+Space Complexity: O(n + m)
