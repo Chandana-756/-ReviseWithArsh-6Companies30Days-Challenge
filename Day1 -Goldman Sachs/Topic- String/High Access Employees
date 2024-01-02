@@ -1,6 +1,6 @@
-Condition: The access times should be sorted and there should be three or more than three access times in list. 
-For the sorted access times find the difference between them  and add 99. If the difference between the two access times >60 minutes 
-then it is false.
+Approach: The access times should be sorted and there should be three or more than three access times in list. 
+For the sorted access times find the difference between them  and add 99. If the difference between the two access times is greater than
+60 minutes then it is false.
 
 Code:
 class Solution {
