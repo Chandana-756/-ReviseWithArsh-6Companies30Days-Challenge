@@ -1,0 +1,30 @@
+Approach: The code uses a depth-first search (DFS) approach to generate all possible combinations of letters for a given set of digits.
+Code:
+class Solution {
+    List<String> answer = null;
+    String[] mapping = new String[]{"", "", "abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    public List<String> letterCombinations(String digits) {
+        answer = new ArrayList<>();
+        if(digits.length() == 0) 
+          return answer;
+        dfs(0,digits,new StringBuilder());
+        return answer;
+    }
+
+    void dfs(int strLength, String digits, StringBuilder temp){
+            if(strLength == digits.length()){
+                answer.add(temp.toString());
+                return;
+            }
+            char ch = digits.charAt(strLength);
+            String str = mapping[ch-'0'];
+            for(char c : str.toCharArray()){
+                temp.append(c);
+                dfs(strLength+1 ,digits, temp);
+                temp.deleteCharAt(temp.length() - 1);
+        }
+    }
+}
+
+Time Complexity: O(4^n)
+Space Complexity: O(n)
