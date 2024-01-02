@@ -1,0 +1,60 @@
+Approach: 
+1. Initialize variables:
+n is the length of the input string s.
+cnt is used to keep track of the numbers to be placed in the output.
+Create a character array ans of length n+1 to store the result.
+
+2. Iterate through each character of the input string:
+If the current character is 'I' or it reaches the end of the string, it means we need to place increasing numbers.
+Iterate backward for every 'I' encountered and fill the numbers in the array.
+The numbers are placed in increasing order, starting from the current value of cnt.
+Update cnt after each placement.
+
+3. Return the resulting string by converting the character array ans to a string.
+
+Code:
+//{ Driver Code Starts
+import java.io.*;
+import java.util.*;
+
+public class GFG
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(read.readLine());
+        while(t-- > 0)
+        {
+            String S = read.readLine();
+            Solution ob = new Solution();
+            System.out.println(ob.printMinNumberForPattern(S));
+        }
+    }
+}
+// } Driver Code Ends
+
+
+//User function Template for Java
+class Solution{
+    static String printMinNumberForPattern(String s){
+        // code 
+        int n = s.length();
+        int cnt = 1;
+        char[] ans = new char[n+1];
+        
+        for(int i=0; i<=n; i++){
+            if(i == n || s.charAt(i) == 'I'){
+                //iterate back for every I
+                for(int j = i-1; j>=-1; j--){
+                    ans[j+1] = (char)('0'+cnt);
+                    cnt++;
+                    if(j >= 0 && s.charAt(j) == 'I') break;
+                }
+            }
+        }
+        return new String(ans);
+    }
+}
+
+Time Complexity: O(N)
+Space Complexity: O(N) 
