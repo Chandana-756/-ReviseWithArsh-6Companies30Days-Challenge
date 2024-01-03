@@ -1,0 +1,49 @@
+Approach: Consider a height array of size m x n  and initialize the all cells in the height as -1. Here -1 indicates that those 
+cells are not visited. Check the cells in the original array. If the cell in the original array is 1 then consider the cell location 
+and based on that location, Check it in height matrix . If in that location the cell value is -1 or 0 update it by one.
+Finally return the height matrix. BFS(Breadth First Search) algorithm is used here.
+
+Code:
+class Solution {
+    public int[] directions = {0,1,0,-1,0};
+    public int[][] highestPeak(int[][] isWater) {
+        int m = isWater.length;
+        int n = isWater[0].length;
+        
+        int[][] height = new int[m][n];
+        Queue<int[]> q = new LinkedList<>();
+        
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(isWater[i][j]==1)
+                {
+                    height[i][j]=0;
+                    q.offer(new int[]{i,j});
+                }
+                else
+                    height[i][j]=-1;
+            }
+        }
+        while(!q.isEmpty())
+        {
+            int[] cell = q.poll();
+            int row = cell[0],col=cell[1];
+            for(int k=0;k<4;k++)
+            {
+                int x=row+directions[k], y=col+directions[k+1];
+                if(x>=0 && x<m && y>=0 && y<n && height[x][y]<0)
+                {
+                    height[x][y] = height[row][col]+1;
+                    q.offer(new int[]{x,y});
+                }
+            }
+        }
+        return height;
+    }
+    
+}
+
+Time Complexity: O(m * n)
+Space Complexity: O(m * n)
