@@ -1,0 +1,16 @@
+Code:
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+        Set<String> seen = new HashSet(), repeated = new HashSet();
+        for(int i=0; i< s.length() - 9; i++){
+            String subString = s.substring(i, i+10);
+            if(seen.contains(subString))
+              repeated.add(subString);
+            seen.add(subString);
+        }
+        return new ArrayList(repeated);
+    }
+}
+
+Time Complexity: O(n)
+Space Complexity: O(1)
