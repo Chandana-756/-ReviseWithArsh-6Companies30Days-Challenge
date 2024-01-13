@@ -30,5 +30,5 @@ class Solution {
   }
 }
 
-Time Complexity: O(n)
+Time Complexity: O(∣special∣∣needs∣k), where k is maximum number of needs i.e 6
 Space Complexity: O(6)
