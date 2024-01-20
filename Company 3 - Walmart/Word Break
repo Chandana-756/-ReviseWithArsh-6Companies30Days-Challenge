@@ -1,0 +1,32 @@
+Code:
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+class Solution {
+    int[] dp;
+
+    public int help(int i, String s, Set<String> wordDict) {
+        if (i == s.length()) return 1;
+        if (dp[i] != -1) return dp[i];
+
+        String temp = "";
+        for (int j = i; j < s.length(); j++) {
+            temp += s.charAt(j);
+            if (wordDict.contains(temp)) {
+                if (help(j + 1, s, wordDict) == 1) return dp[i] = 1;
+            }
+        }
+        return dp[i] = 0;
+    }
+
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> st = new HashSet<>(wordDict);
+        dp = new int[s.length() + 1];
+        Arrays.fill(dp, -1);
+        return help(0, s, st) == 1;
+    }
+}
+
+Time Complexity: O(n)
+Space Complexity: O(n)
