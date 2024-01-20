@@ -1,0 +1,27 @@
+Code:
+class Solution {
+    public int longestString(int x, int y, int z) {
+        int ans = 0;
+        int AA_start = 0;
+        int BB_start = 0;
+        int x1=x, y1=y;
+        while(x1>0 && y1>0){
+            AA_start +=2;
+            BB_start += 2;
+            x1--;
+            y1--;
+        }
+        if(x1>0){
+            AA_start++;
+        }
+        if(y1>0){
+            BB_start++;
+        }
+        ans = Math.max(AA_start,BB_start);
+        ans += z;
+        return 2*ans;
+    }
+}
+
+Time Complexity: O(x+y)
+Space Complexity: O(1)
