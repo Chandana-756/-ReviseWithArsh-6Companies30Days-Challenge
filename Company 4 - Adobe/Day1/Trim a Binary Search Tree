@@ -1,3 +1,7 @@
+Approach: 1. When a root is less than low, answer is root.right.
+2. When root is greater than high, answer is root.left.
+3. When root is in range, answer is root , root.left contains left tree result and root.right contains right tree result.
+
 Code:
 /**
  * Definition for a binary tree node.
