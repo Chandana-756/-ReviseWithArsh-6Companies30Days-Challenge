@@ -1,0 +1,38 @@
+Approach-1:
+Code:
+class Solution {
+    public int minimumLengthEncoding(String[] words) {
+        Arrays.sort(words,(a,b) -> b.length()-a.length());
+        StringBuilder encoding = new StringBuilder();
+        for(String s : words){
+            if(encoding.indexOf(s+"#")==-1){
+                encoding.append(s+"#");
+            }
+        }
+        return encoding.length();
+    }
+}
+
+Time Complexity: O(NlogN)
+Space Complexity:O(length of all words)
+
+Approach-2: Using HashSet because HashSet removes the duplicate elements.
+Code:
+class Solution {
+    public int minimumLengthEncoding(String[] words) {
+       Set<String> wordSet = new HashSet<>(Arrays.asList(words));
+       for(String s:words){
+           for(int i=1; i<s.length(); i++){
+               wordSet.remove(s.substring(i));
+           }
+       }
+       int length = 0;
+       for(String s:wordSet){
+           length += s.length()+1;
+       }
+       return length;
+    }
+}
+
+Time Complexity: O(n*m^2) where n is number of words and m is average length of a word
+Space Complexity: O(n*m)
