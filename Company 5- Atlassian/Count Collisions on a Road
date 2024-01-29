@@ -1,0 +1,52 @@
+Code:
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public int countCollisions(String directions) {
+        List<Pair<Character, Integer>> v = new ArrayList<>();
+
+        for (int i = 0; i < directions.length(); i++) {
+            int c = 1;
+            while (i + 1 < directions.length() && directions.charAt(i) == directions.charAt(i + 1)) {
+                i++;
+                c++;
+            }
+            v.add(new Pair<>(directions.charAt(i), c));
+        }
+
+        int ans = 0;
+        for (int i = 0; i < v.size() - 1; i++) {
+            if (v.get(i).getFirst() == 'R' && v.get(i + 1).getFirst() == 'L') {
+                ans += v.get(i).getSecond() + v.get(i + 1).getSecond();
+            } else if (v.get(i).getFirst() == 'S' && v.get(i + 1).getFirst() == 'L') {
+                ans += v.get(i + 1).getSecond();
+            } else if (v.get(i).getFirst() == 'R' && v.get(i + 1).getFirst() == 'S') {
+                ans += v.get(i).getSecond();
+            }
+        }
+
+        return ans;
+    }
+
+    static class Pair<T, U> {
+        private final T first;
+        private final U second;
+
+        public Pair(T first, U second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        public T getFirst() {
+            return first;
+        }
+
+        public U getSecond() {
+            return second;
+        }
+    }
+}
+
+Time Complexity: O(n) where n is length of the directions string
+Space Complexity: O(n)
